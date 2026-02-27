@@ -34,3 +34,9 @@ Build an end-to-end ROS2 navigation demo in simulation (Gazebo + RViz2 + Nav2), 
 
 ## 🧠 Notes / Troubleshooting
 - (TBD)
+
+## Progress
+- [x] Git setup & clone project
+ 
+## First update
+This is my first ROS2 navigation learning record.
