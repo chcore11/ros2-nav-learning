@@ -36,15 +36,4 @@ Build an end-to-end ROS2 navigation demo in simulation (Gazebo + RViz2 + Nav2), 
 - (TBD)
 
 ## Progress
-- [x] Git setup & clone project
- 
-## First update
-This is my first ROS2 navigation learning record.
-
-## Day2
-
-- Started Git practice
-- Learned repository navigation
-- Practiced Git workflow (add / commit / push)
-- Learned how commit message editor works
-- Repository synced with GitHub
+Daily progress is tracked in `/logs`.
