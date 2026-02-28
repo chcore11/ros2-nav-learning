@@ -40,3 +40,8 @@ Build an end-to-end ROS2 navigation demo in simulation (Gazebo + RViz2 + Nav2), 
  
 ## First update
 This is my first ROS2 navigation learning record.
+
+## Day2
+
+- Started Git practice
+- Learned repository navigation
