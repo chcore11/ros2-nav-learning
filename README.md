@@ -45,3 +45,6 @@ This is my first ROS2 navigation learning record.
 
 - Started Git practice
 - Learned repository navigation
+- Practiced Git workflow (add / commit / push)
+- Learned how commit message editor works
+- Repository synced with GitHub
