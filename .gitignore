@@ -1,0 +1,15 @@
+# OS / Editor
+.DS_Store
+Thumbs.db
+
+# VSCode
+.vscode/
+
+# Python
+__pycache__/
+*.pyc
+
+# ROS build artifacts (later)
+build/
+install/
+log/
