@@ -1,0 +1,192 @@
+ROS2 Navigation Learning Project
+🎯 Project Goal
+
+Build a complete end-to-end ROS2 navigation system in simulation using:
+
+Gazebo + RViz2 + SLAM + AMCL + Nav2
+
+The project focuses on system-level understanding, engineering reproducibility, and structured documentation.
+
+This repository is developed as a robotics internship portfolio project.
+
+🖥️ Environment
+
+OS: Ubuntu 22.04 (WSL2)
+
+ROS2: Humble Desktop
+
+Simulator: Gazebo
+
+Robot: TurtleBot3
+
+Language: Python (rclpy)
+
+Build Tool: colcon
+
+📍 Current Status
+
+Stage 1 completed.
+
+The project now supports full autonomous navigation in simulation.
+
+Completed pipeline:
+
+Gazebo Simulation
+→ SLAM Mapping
+→ Map Save / Load
+→ AMCL Localization
+→ Nav2 Navigation
+→ RViz Goal Navigation
+
+The robot can successfully:
+
+build a map using SLAM
+
+save and load the static map
+
+localize itself using AMCL
+
+navigate to a goal in RViz
+
+avoid obstacles using costmaps
+
+🧠 Navigation Pipeline
+
+The navigation system follows the standard Nav2 architecture:
+
+RViz Goal
+→ bt_navigator
+→ planner_server
+→ global path
+→ controller_server
+→ /cmd_vel
+→ robot motion
+
+Supporting modules:
+map
+→ AMCL localization
+→ costmap updates
+→ obstacle-aware navigation
+
+Core concept:
+
+planner decides where to go
+controller decides how to move
+AMCL decides where the robot is
+costmap decides which space is safe
+🗺️ Learning Roadmap
+Stage 1 (Completed)
+
+ROS2 fundamentals
+
+workspace setup
+
+topic / node communication
+
+TF understanding
+
+Gazebo simulation
+
+SLAM mapping
+
+map save & load
+
+AMCL localization
+
+Nav2 navigation
+
+navigation architecture understanding
+
+Stage 2 (Next)
+
+Focus on deeper system understanding:
+
+Nav2 parameter system
+
+costmap layer structure
+
+controller algorithms
+
+navigation tuning
+
+navigation debugging
+
+Stage 3 (Planned)
+
+Engineering improvements:
+
+rosbag debugging
+
+parameter tuning experiments
+
+navigation testing scenarios
+
+performance analysis
+
+📂 Project Structure
+ros2-nav-learning/
+│
+├── docs/           
+│   Navigation concepts and explanations
+│
+├── logs/           
+│   Daily development logs
+│
+├── screenshots/    
+│   Experiment results and verification
+│
+├── workspace/      
+│   ROS2 packages and experiments
+│
+├── scripts/        
+│   Launch helper scripts for starting the navigation system
+│
+└── README.md
+## Key Documentation
+
+Core concept explanations are located in:
+
+docs/
+
+Important documents:
+
+- ROS2 Basics
+- TF Tree
+- Map → Odom → Base Link relationship
+- SLAM Mapping
+- AMCL Localization
+- Nav2 Navigation Pipeline
+- Costmap / Planner / Controller architecture
+📈 Learning Focus
+
+This project emphasizes:
+
+robotics system architecture
+
+ROS2 debugging capability
+
+engineering documentation
+
+reproducible robotics environments
+
+autonomous navigation systems
+
+📌 Notes
+
+Daily development progress is recorded in:
+
+logs/
+
+Concept explanations and learning notes are documented in:
+
+docs/
+
+This repository evolves continuously as the navigation system is built, analyzed, and improved.
+
+🚀 Stage 1 Milestone
+
+The project has successfully reached the first milestone:
+
+A fully working ROS2 navigation stack in simulation.
+
+Future work will focus on deeper system understanding, parameter tuning, and robotics engineering practices.
