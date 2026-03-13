@@ -2,6 +2,8 @@ ROS2 Navigation Learning Project
 
 # ros2-nav-learning
 
+# ros2-nav-learning
+
 <div align="center">
 
 ![ROS2](https://img.shields.io/badge/ROS2-Humble-blue?style=flat-square&logo=ros)
@@ -11,7 +13,7 @@ ROS2 Navigation Learning Project
 
 ---
 
-**这是一个从零开始的 ROS2 导航学习项目，目前已圆满完成 Stage 1 的全流程验证。**
+**A comprehensive ROS2 navigation learning project. Stage 1: Simulation and Nav2 pipeline successfully verified.**
 
 </div>
 
