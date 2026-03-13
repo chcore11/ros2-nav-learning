@@ -1,6 +1,5 @@
 ROS2 Navigation Learning Project
 
-# ros2-nav-learning
 
 # ros2-nav-learning
 
@@ -16,6 +15,7 @@ ROS2 Navigation Learning Project
 **A comprehensive ROS2 navigation learning project. Stage 1: Simulation and Nav2 pipeline successfully verified.**
 
 </div>
+
 
 🎯 Project Goal
 
