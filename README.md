@@ -190,3 +190,15 @@ The project has successfully reached the first milestone:
 A fully working ROS2 navigation stack in simulation.
 
 Future work will focus on deeper system understanding, parameter tuning, and robotics engineering practices.
+
+## 🏆 Stage 1 Milestone Reached (2026-03-13)
+
+A fully functional ROS2 navigation pipeline has been successfully established in a simulated environment.
+
+### Core Achievements:
+- **Simulation**: Stable Gazebo + TurtleBot3 control loop established.
+- **Mapping**: Completed SLAM using `slam_toolbox` and verified occupancy grid consistency.
+- **Navigation**: Integrated AMCL and Nav2, achieving stable goal-based autonomous movement.
+- **Architecture**: Deep understanding of Nav2's internal mechanisms, including Behavior Trees and Lifecycle management.
+
+This milestone marks the transition from basic system setup to advanced parameter tuning and engineering practices.
