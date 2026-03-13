@@ -3,7 +3,6 @@
 ---
 
 # Phase 1 — Environment & ROS2 Basics
-
 - [✅] Install Ubuntu 22.04 (WSL2)
 - [✅] Configure proxy and network
 - [✅] System update & security check
@@ -28,12 +27,11 @@ Status: ✔ Phase 1 Completed
 ---
 
 # Phase 2 — TF + URDF + Gazebo
-
 - [✅] Run static_transform_publisher
 - [✅] Generate TF tree (PDF)
 - [✅] Understand map → odom → base_link relationship
 - [✅] Debug dynamic TF issues
-- [ ] Create simple URDF model
+- [ ] Create simple URDF model (Remaining: Custom modeling)
 - [ ] Load robot model in RViz2
 - [ ] Use xacro
 - [✅] Launch Gazebo
@@ -41,13 +39,11 @@ Status: ✔ Phase 1 Completed
 - [✅] Move robot using teleop
 - [✅] Understand simulation clock
 
-Status: ✔ Simulation Control Loop Established  
-Remaining: URDF modeling + advanced TF debugging
+Status: ✔ Simulation Control Loop Established
 
 ---
 
 # Phase 3 — SLAM Mapping
-
 - [✅] Run slam_toolbox
 - [✅] Build map
 - [✅] Save map
@@ -58,14 +54,13 @@ Remaining: URDF modeling + advanced TF debugging
 - [✅] Explain laser scan usage
 - [ ] Record rosbag during mapping
 - [ ] Replay mapping session
-- [ ] Write mapping README
+- [✅] Write mapping README
 
-Status: ✔ Phase 3 Completed (SLAM mapping pipeline verified)
+Status: ✔ Phase 3 Completed (SLAM pipeline verified)
 
 ---
 
 # Phase 4 — Localization & Navigation
-
 - [✅] Launch AMCL
 - [✅] Localize robot on saved map
 - [✅] Launch Nav2 stack
@@ -75,41 +70,40 @@ Status: ✔ Phase 3 Completed (SLAM mapping pipeline verified)
 - [✅] Explain costmap layers
 - [✅] Explain planner vs controller
 - [✅] Explain global vs local planning
-- [ ] Tune costmap parameters
-- [ ] Tune controller parameters
-- [ ] Compare navigation performance
-- [ ] Document tuning results
+- [✅] Analyze costmap parameters (Day 11: Inflation/Global/Local)
+- [✅] Analyze controller parameters (Day 11: DWB Critics scoring)
+- [✅] Verify navigation stability (Day 8/9: Obstacle avoidance tests)
+- [✅] Document system-level understanding (Day 14 summary)
 
-Status: 🚧 Phase 4 In Progress (Navigation pipeline fully working)
+Status: ✔ Phase 4 Completed (Stage 1 Core Pipeline)
 
 ---
 
 # Phase 5 — Engineering & Debugging
-
 - [ ] Record navigation rosbag
 - [ ] Replay navigation session
 - [ ] Analyze topic timing
-- [ ] Identify bottlenecks
-- [ ] Refactor launch files
+- [✅] Identify bottlenecks (Day 13: Recovery behavior analysis)
+- [✅] Refactor/Analyze launch files (Day 12: Lifecycle & Bringup)
 - [✅] Implement one-click launch
-- [ ] Write troubleshooting document
+- [✅] Write troubleshooting document (Day 7: Map path error fix)
+- [✅] Deep Dive: Nav2 Behavior Tree logic (Day 13)
 
-Status: 🚧 Early Engineering Setup Started
+Status: 🚧 Engineering Hardening & Architecture Mastery
 
 ---
 
 # Phase 6 — Portfolio Packaging
-
-- [ ] Clean project directory
+- [✅] Project directory structure established
 - [ ] Write full installation guide
 - [ ] Write usage guide
-- [ ] Draw architecture diagram
+- [✅] Initial conceptual diagrams (docs/ documentation)
 - [ ] Record final demo video
 - [ ] Prepare English project introduction
 - [ ] Prepare 3-minute explanation script
 
-Status: ⏳ Planned (Documentation structure already started)
+Status: ⏳ Planned (Documentation-driven development ongoing)
 
 ---
 
-Last Updated: 2026-03-09 (After Nav2 architecture analysis)
+Last Updated: 2026-03-13 (Stage 1 Final Review)
