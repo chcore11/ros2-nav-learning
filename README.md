@@ -1,4 +1,20 @@
 ROS2 Navigation Learning Project
+
+# ros2-nav-learning
+
+<div align="center">
+
+![ROS2](https://img.shields.io/badge/ROS2-Humble-blue?style=flat-square&logo=ros)
+![Ubuntu](https://img.shields.io/badge/Ubuntu-22.04-orange?style=flat-square&logo=ubuntu)
+![Status](https://img.shields.io/badge/Stage--1-Completed-success?style=flat-square&logo=checkmarx)
+![License](https://img.shields.io/badge/License-MIT-green?style=flat-square)
+
+---
+
+**这是一个从零开始的 ROS2 导航学习项目，目前已圆满完成 Stage 1 的全流程验证。**
+
+</div>
+
 🎯 Project Goal
 
 Build a complete end-to-end ROS2 navigation system in simulation using:
