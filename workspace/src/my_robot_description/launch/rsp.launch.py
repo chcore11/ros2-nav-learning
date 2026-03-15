@@ -1,33 +1,32 @@
+from launch import LaunchDescription
+from launch_ros.actions import Node
 import os
 from ament_index_python.packages import get_package_share_directory
-from launch import LaunchDescription
-from launch.actions import DeclareLaunchArgument
-from launch.substitutions import LaunchConfiguration
-from launch_ros.actions import Node
+
 
 def generate_launch_description():
+    pkg_path = get_package_share_directory('my_robot_description')
+    urdf_file = os.path.join(pkg_path, 'urdf', 'my_robot.urdf')
 
-    # 1. Specify the name of the package and the path to the urdf file
-    pkg_name = 'my_robot_description'
-    urdf_file = 'my_robot.urdf'
+    with open(urdf_file, 'r') as infp:
+        robot_description = infp.read()
 
-    # 2. Get the full path to the urdf file
-    pkg_share = get_package_share_directory(pkg_name)
-    urdf_path = os.path.join(pkg_share, 'urdf', urdf_file)
-
-    # 3. Read the urdf file content
-    with open(urdf_path, 'r') as infp:
-        robot_description_raw = infp.read()
-
-    # 4. Configure the node
-    node_robot_state_publisher = Node(
-        package='robot_state_publisher',
-        executable='robot_state_publisher',
-        output='screen',
-        parameters=[{'robot_description': robot_description_raw}]
+    joint_state_publisher_node = Node(
+        package='joint_state_publisher',
+        executable='joint_state_publisher',
+        name='joint_state_publisher',
+        output='screen'
     )
 
-    # 5. Launch it!
+    robot_state_publisher_node = Node(
+        package='robot_state_publisher',
+        executable='robot_state_publisher',
+        name='robot_state_publisher',
+        output='screen',
+        parameters=[{'robot_description': robot_description}]
+    )
+
     return LaunchDescription([
-        node_robot_state_publisher
+        joint_state_publisher_node,
+        robot_state_publisher_node
     ])
