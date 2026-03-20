@@ -11,7 +11,7 @@ def generate_launch_description():
             output='screen',
             parameters=[{
                 'use_sim_time': True,
-                'robot_description': open('/home/chung/ros2-nav-learning/workspace/src/my_robot_description/urdf/my_robot.urdf').read()
+                'robot_description': open('/home/chung/ros2-nav-learning/workspace/src/my_robot_description/urdf/sim_robot.urdf').read()
             }]
         ),
 
@@ -20,7 +20,7 @@ def generate_launch_description():
             executable='spawn_entity.py',
             arguments=[
                 '-topic', 'robot_description',
-                '-entity', 'my_robot'
+                '-entity', 'sim_robot'
             ],
             output='screen'
         )

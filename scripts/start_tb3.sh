@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
-set -e
+set -euo pipefail
 
-SESSION="robot_dev0"
+source "$HOME/ros2-nav-learning/config/env_tb3.sh"
+
+SESSION="$TMUX_SESSION"
 
 if tmux has-session -t "$SESSION" 2>/dev/null; then
   tmux attach -t "$SESSION"
@@ -10,13 +12,13 @@ fi
 
 tmux new-session -d -s "$SESSION" -n GAZEBO
 tmux send-keys -t "$SESSION:GAZEBO" \
-"source ~/.bashrc && export TURTLEBOT3_MODEL=burger && ros2 launch turtlebot3_gazebo turtlebot3_world.launch.py" C-m
+"source ~/.bashrc && export TURTLEBOT3_MODEL=$TURTLEBOT3_MODEL && ros2 launch turtlebot3_gazebo turtlebot3_world.launch.py" C-m
 
 sleep 3
 
 tmux new-window -t "$SESSION" -n NAV2
 tmux send-keys -t "$SESSION:NAV2" \
-"source ~/.bashrc && export TURTLEBOT3_MODEL=burger && ros2 launch turtlebot3_navigation2 navigation2.launch.py use_sim_time:=True map:=$HOME/ros2-nav-learning/maps/turtlebot3_world_map.yaml" C-m
+"source ~/.bashrc && export TURTLEBOT3_MODEL=$TURTLEBOT3_MODEL && ros2 launch turtlebot3_navigation2 navigation2.launch.py use_sim_time:=True map:=$MAP_YAML" C-m
 
 tmux new-window -t "$SESSION" -n DEBUG
 tmux send-keys -t "$SESSION:DEBUG" \
