@@ -1,133 +1,283 @@
 # Nav2 System Architecture
 
-This document explains how the Nav2 system works as a complete navigation pipeline.
+This document explains how Nav2 works as a complete navigation system.
+
+Rather than viewing Nav2 as a single module, it should be understood as a coordinated pipeline that transforms a user-defined goal into robot motion.
 
 ---
 
-## 1. High-Level Pipeline
+## 1. What Nav2 Does
+
+Nav2 takes a navigation goal from RViz and converts it into motion commands that drive the robot toward the target safely.
+
+In simple terms:
+
+RViz Goal  
+→ system planning and decision-making  
+→ motion control  
+→ robot movement
+
+Its job is not only to move the robot, but to make sure the robot:
+- knows where it is
+- knows where it can go
+- knows how to move safely
+
+---
+
+## 2. High-Level Pipeline
+
+The main execution pipeline is:
 
 RViz Goal  
 → bt_navigator  
 → planner_server  
 → controller_server  
 → /cmd_vel  
-→ Robot Motion  
+→ Robot Motion
 
-This is the main execution flow of navigation.
+This is the control path of the system.
+
+A goal is first received by `bt_navigator`, which coordinates the navigation task.
+It then asks the planner to compute a path, asks the controller to follow that path, and finally produces velocity commands through `/cmd_vel`.
 
 ---
 
-## 2. Three Core Subsystems (Key Insight 🔥)
+## 3. Three Core Questions in Navigation
 
-Nav2 can be understood as three interacting subsystems:
+A navigation system must answer three fundamental questions:
 
-### 1. Localization (Where am I?)
+1. Where am I?
+2. Where should I go?
+3. How should I move?
+
+Nav2 answers these questions through three subsystems:
+
+- Localization
+- Planning
+- Control
+
+This is the core idea of the architecture.
+
+---
+
+## 4. Localization: Where am I?
+
+Localization is handled by AMCL.
 
 AMCL estimates the robot pose using:
-
 - map
 - scan
 - odom
 
-Output:
+Its output is:
+- robot pose in the map frame
+- the `map → odom` transform
 
-robot pose in map frame  
-map → odom transform
+Why is this necessary?
 
-Without localization, navigation cannot work.
+Because the robot cannot navigate unless it knows its current position.
+Odometry alone is continuous but drifts over time.
+AMCL corrects that drift by matching laser scan data against the known map.
 
----
+So in Nav2, localization provides the answer to:
 
-### 2. Planning (Where should I go?)
+**“Where is the robot right now?”**
 
-planner_server:
-
-- uses global_costmap
-- computes a collision-free path
-
-Output:
-
-global path
+Without localization, planning and control would not be reliable.
 
 ---
 
-### 3. Control (How do I move?)
+## 5. Planning: Where should I go?
 
-controller_server:
+Planning is handled by `planner_server`.
 
-- uses local_costmap
-- follows the global path
-- generates velocity commands
+The planner uses:
+- the current robot pose
+- the goal pose
+- the global costmap
 
-Output:
+Its output is:
+- a global path
 
-/cmd_vel
+This path is not just a straight line.
+It is a collision-aware route computed over the map and obstacle information.
 
----
+The planner answers:
 
-## 3. Perception Flow
+**“What is a safe path from the current position to the goal?”**
 
-Sensors → costmaps → planner/controller
-
-- scan → obstacle detection
-- costmap → environment representation
-
-Global costmap → long-term planning  
-Local costmap → real-time obstacle avoidance  
+This is a global decision.
+It focuses on the overall route, not the robot’s exact wheel-level motion.
 
 ---
 
-## 4. Behavior Tree (System Coordinator)
+## 6. Control: How should I move?
 
-bt_navigator coordinates the entire navigation process.
+Control is handled by `controller_server`.
 
-Main steps:
+The controller uses:
+- the global path
+- the current robot pose
+- the local costmap
 
+Its output is:
+- `/cmd_vel`
+
+The controller does not simply “follow a line”.
+Instead, it continuously decides how the robot should move at each moment.
+
+For example, it may:
+- adjust heading
+- slow down near the goal
+- avoid nearby obstacles
+- correct path deviation
+
+The controller answers:
+
+**“What should the robot do right now in order to follow the path safely?”**
+
+This is why the controller is different from the planner:
+- planner = global route
+- controller = local execution
+
+---
+
+## 7. Costmaps: Where can I move safely?
+
+Costmaps represent the environment in a form that planning and control can use.
+
+They are built from sensor data and map information.
+
+Nav2 commonly uses two types of costmaps:
+
+### Global Costmap
+Used by the planner.
+
+It represents the larger environment and supports long-range path planning.
+
+### Local Costmap
+Used by the controller.
+
+It represents nearby obstacles and supports real-time obstacle avoidance.
+
+Why are costmaps important?
+
+Because navigation is not only about knowing the goal.
+The system must also know which areas are free, occupied, or risky.
+
+Costmaps provide the answer to:
+
+**“Which space is safe for the robot to use?”**
+
+---
+
+## 8. Behavior Tree: Who coordinates everything?
+
+`bt_navigator` is the coordinator of the entire Nav2 system.
+
+It uses a Behavior Tree to organize the navigation process.
+
+Typical steps include:
 - ComputePathToPose
 - FollowPath
 - Recovery behaviors
 
-Recovery actions include:
-
-- clearing costmap
+Recovery behaviors may include:
+- clearing costmaps
 - rotating
 - backing up
 
----
+Why is this needed?
 
-## 5. Full System View
+Because navigation is not always successful on the first try.
+The system needs a structured way to react to failure, retry actions, and recover from problems.
 
-Navigation is not a single module.
-
-It is a system composed of:
-
-- localization (AMCL)
-- environment modeling (costmaps)
-- planning (planner_server)
-- control (controller_server)
-- coordination (bt_navigator)
+So the Behavior Tree is not just a “launcher”.
+It is the decision-making framework that coordinates the whole task.
 
 ---
 
-## 6. Core Understanding
+## 9. Three System Flows
 
-Navigation only works when:
+Nav2 can also be understood through three interacting flows.
 
-- robot knows where it is (localization)
-- system knows where it can go (costmap)
-- planner computes a valid path
-- controller executes motion safely
+### 1. Control Flow
+RViz Goal  
+→ bt_navigator  
+→ planner_server  
+→ controller_server  
+→ /cmd_vel  
+→ Robot Motion
+
+This flow explains how a user goal becomes robot movement.
+
+### 2. Localization Flow
+map + scan + odom  
+→ AMCL  
+→ robot pose in map frame  
+→ `map → odom`
+
+This flow explains how the robot knows where it is.
+
+### 3. Perception Flow
+scan / map  
+→ global costmap / local costmap  
+→ planner / controller
+
+This flow explains how the system understands free space, obstacles, and safe movement regions.
+
+These three flows work together.
+Navigation succeeds only when all three are functioning correctly.
+
+---
+
+## 10. Why This Architecture Is Split into Modules
+
+Nav2 is divided into localization, planning, control, costmaps, and coordination for a reason.
+
+This separation makes the system:
+- easier to understand
+- easier to debug
+- easier to replace or extend
+- more robust in complex environments
+
+For example:
+- localization focuses only on pose estimation
+- planning focuses only on route generation
+- control focuses only on motion execution
+
+This is an example of modular system design.
+
+Instead of one large monolithic navigation block, Nav2 uses specialized components with clear responsibilities.
+
+---
+
+## 11. Core Understanding
+
+Nav2 works only when all of the following are available:
+
+- the robot knows where it is
+- the system knows where it can move
+- the planner can compute a valid path
+- the controller can execute motion safely
+- the Behavior Tree can coordinate the full process
+
+So Nav2 should not be understood as a single algorithm.
+
+It is a coordinated navigation system built from multiple interacting subsystems.
 
 ---
 
 ## Conclusion
 
-Nav2 is a modular system where each component has a clear role:
+Nav2 transforms a goal into safe robot motion through a modular architecture.
 
-- AMCL → pose estimation  
-- planner → path generation  
-- controller → motion execution  
-- costmap → environment understanding  
-- behavior tree → system coordination  
+Its core logic can be summarized as:
 
-Together, they enable autonomous navigation.
+- Localization answers: **Where am I?**
+- Planning answers: **Where should I go?**
+- Control answers: **How should I move?**
+- Costmaps answer: **Where can I move safely?**
+- Behavior Tree answers: **How are all these steps coordinated?**
+
+Together, these components enable autonomous navigation.

@@ -2,108 +2,136 @@
 
 ---
 
-# Phase 1 — Environment & ROS2 Basics
-- [✅] Install Ubuntu 22.04 (WSL2)
-- [✅] Configure proxy and network
-- [✅] System update & security check
-- [✅] Install ROS2 Humble Desktop
-- [✅] Add ROS2 to ~/.bashrc
-- [✅] Verify ROS2 environment variables
-- [✅] Run official demo talker/listener
-- [✅] Use ros2 topic list / echo / hz
-- [✅] Use ros2 node list
-- [✅] Explain publisher/subscriber mechanism
-- [✅] Explain DDS role
-- [✅] Explain timer & Hz relationship
-- [✅] Create ros2_ws
-- [✅] Use colcon build
-- [✅] Create Python package
-- [✅] Configure entry_points
-- [✅] Fix build errors independently
-- [✅] Clean rebuild workflow
+## 🧠 Current Status
 
-Status: ✔ Phase 1 Completed
+Stage 1 fully completed.
+
+A complete ROS2 navigation pipeline has been successfully built, including:
+
+- SLAM mapping  
+- AMCL localization  
+- Nav2 navigation  
+- TF system integration  
+- End-to-end autonomous navigation  
+
+The system is now stable, reproducible, and understood at a system level.
 
 ---
 
-# Phase 2 — TF + URDF + Gazebo
-- [✅] Run static_transform_publisher
-- [✅] Generate TF tree (PDF)
-- [✅] Understand map → odom → base_link relationship
-- [✅] Debug dynamic TF issues
-- [ ] Create simple URDF model (Remaining: Custom modeling)
-- [ ] Load robot model in RViz2
-- [ ] Use xacro
-- [✅] Launch Gazebo
-- [✅] Spawn TurtleBot3
-- [✅] Move robot using teleop
-- [✅] Understand simulation clock
+# Phase 1 — Environment & ROS2 Basics
 
-Status: ✔ Simulation Control Loop Established
+- [✅] Install Ubuntu 22.04 (WSL2)
+- [✅] Configure proxy and network
+- [✅] Install ROS2 Humble Desktop
+- [✅] ROS2 environment setup
+- [✅] Run official demos (talker/listener)
+- [✅] Understand topics / nodes / messages
+- [✅] Explain publisher/subscriber mechanism
+- [✅] Explain DDS communication
+- [✅] Create ROS2 workspace
+- [✅] Build packages with colcon
+- [✅] Create Python packages
+- [✅] Debug build issues independently
+
+Status: ✔ Completed
+
+---
+
+# Phase 2 — TF + Simulation System
+
+- [✅] Understand TF tree structure
+- [✅] Explain map → odom → base_link relationship
+- [✅] Debug TF issues
+- [✅] Launch Gazebo simulation
+- [✅] Spawn TurtleBot3
+- [✅] Teleop control
+- [✅] Understand simulation time
+
+Status: ✔ Simulation loop established
 
 ---
 
 # Phase 3 — SLAM Mapping
+
 - [✅] Run slam_toolbox
 - [✅] Build map
-- [✅] Save map
-- [✅] Reload map
+- [✅] Save / load map
 - [✅] Verify map consistency
-- [✅] Explain SLAM concept
-- [✅] Explain occupancy grid
-- [✅] Explain laser scan usage
-- [ ] Record rosbag during mapping
-- [ ] Replay mapping session
-- [✅] Write mapping README
+- [✅] Explain SLAM principle
+- [✅] Understand occupancy grid
+- [✅] Use laser scan for mapping
 
-Status: ✔ Phase 3 Completed (SLAM pipeline verified)
+Status: ✔ Completed
 
 ---
 
 # Phase 4 — Localization & Navigation
-- [✅] Launch AMCL
-- [✅] Localize robot on saved map
-- [✅] Launch Nav2 stack
-- [✅] Send goal in RViz
-- [✅] Robot reaches goal successfully
-- [✅] Explain AMCL principle
-- [✅] Explain costmap layers
-- [✅] Explain planner vs controller
-- [✅] Explain global vs local planning
-- [✅] Analyze costmap parameters (Day 11: Inflation/Global/Local)
-- [✅] Analyze controller parameters (Day 11: DWB Critics scoring)
-- [✅] Verify navigation stability (Day 8/9: Obstacle avoidance tests)
-- [✅] Document system-level understanding (Day 14 summary)
 
-Status: ✔ Phase 4 Completed (Stage 1 Core Pipeline)
+- [✅] Launch AMCL
+- [✅] Localize robot on map
+- [✅] Launch Nav2 stack
+- [✅] Send navigation goals
+- [✅] Robot reaches goals successfully
+- [✅] Explain AMCL (localization flow)
+- [✅] Explain planner vs controller
+- [✅] Explain costmap (global / local)
+- [✅] Understand navigation pipeline
+- [✅] Verify obstacle avoidance
+- [✅] Analyze key parameters (costmap / controller)
+
+Status: ✔ Completed (Full Navigation Pipeline)
 
 ---
 
-# Phase 5 — Engineering & Debugging
+# Phase 5 — System Understanding (🔥 Current Focus)
+
+- [✅] Explain full Nav2 pipeline end-to-end
+- [✅] Understand planner / controller / costmap interaction
+- [✅] Understand AMCL role in navigation
+- [✅] Understand TF design (map → odom → base_link)
+- [✅] Explain why system is modular
+- [🟡] Improve stability of explanation (interview-level clarity)
+- [🟡] Strengthen system-level reasoning (why design decisions)
+
+Status: 🚧 In Progress (80% → 100%)
+
+---
+
+# Phase 6 — Engineering & Debugging
+
 - [ ] Record navigation rosbag
 - [ ] Replay navigation session
 - [ ] Analyze topic timing
-- [✅] Identify bottlenecks (Day 13: Recovery behavior analysis)
-- [✅] Refactor/Analyze launch files (Day 12: Lifecycle & Bringup)
+- [✅] Analyze behavior tree logic
+- [✅] Understand lifecycle nodes
 - [✅] Implement one-click launch
-- [✅] Write troubleshooting document (Day 7: Map path error fix)
-- [✅] Deep Dive: Nav2 Behavior Tree logic (Day 13)
+- [✅] Write troubleshooting document
 
-Status: 🚧 Engineering Hardening & Architecture Mastery
+Status: 🚧 Ongoing
 
 ---
 
-# Phase 6 — Portfolio Packaging
-- [✅] Project directory structure established
-- [ ] Write full installation guide
+# Phase 7 — Portfolio Packaging (🔥 Current)
+
+- [✅] Project structure organized
+- [✅] Logs system structured (daily / debug / milestone)
+- [✅] Core documentation written (Nav2 / TF / SLAM)
+- [✅] README optimized for presentation
+- [ ] Write installation guide
 - [ ] Write usage guide
-- [✅] Initial conceptual diagrams (docs/ documentation)
-- [ ] Record final demo video
-- [ ] Prepare English project introduction
-- [ ] Prepare 3-minute explanation script
+- [ ] Add demo video / GIF
+- [ ] Prepare project explanation script
 
-Status: ⏳ Planned (Documentation-driven development ongoing)
+Status: 🚧 In Progress
 
 ---
 
-Last Updated: 2026-03-13 (Stage 1 Final Review)
+## 🎯 Next Milestone
+
+- Achieve **full system explanation capability**
+- Complete **portfolio-level documentation**
+- Prepare for **project presentation / mentor discussion**
+
+---
+
+Last Updated: 2026-03-21 (Stage 1 Completed + System Understanding Phase)
