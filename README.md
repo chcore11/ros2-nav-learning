@@ -13,6 +13,14 @@
 
 </div>
 
+## 👤 About This Project
+
+This project was built as part of my learning journey in robotics and ROS2.
+
+Starting from zero, I focused on not only making the system run, but also understanding how each module works together as a complete navigation pipeline.
+
+This repository represents a full simulation-based navigation system and serves as the foundation for further development towards real robot control and embedded systems.
+
 ---
 
 ## 🎯 What This Project Does
@@ -149,10 +157,16 @@ This marks the transition from:
 
 ## 🔜 Next Steps
 
-* Parameter tuning
-* Navigation optimization
-* rosbag analysis
-* Performance evaluation
+The next stage of this project will focus on transitioning from simulation to real-world systems:
+
+- Integrating embedded systems (Arduino / MCU) for motor control
+- Bridging ROS2 with hardware via serial communication
+- Implementing odometry feedback (encoder-based)
+- Building a minimal mobile robot base
+
+This marks the evolution from:
+
+> Simulation-based navigation → Real robot system integration
 
 ---
 
